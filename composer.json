@@ -19,7 +19,7 @@
     "contao/core-bundle": "^4.4",
     "symfony/config": "^3.3 || ^4.0",
     "symfony/http-kernel": "^3.3 || ^4.0",
-    "zeichen32/gitlabapibundle": "^3.1",
+    "zeichen32/gitlabapibundle": "^3.1"
   },
   "require-dev": {
     "contao/manager-plugin": "^2.7",
