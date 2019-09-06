@@ -1,6 +1,7 @@
 <?php
 
 use Defuse\Crypto\Crypto;
+use Defuse\Crypto\Key;
 
 $GLOBALS['TL_DCA']['tl_gitlab_pipeline'] = [
 
@@ -58,14 +59,14 @@ $GLOBALS['TL_DCA']['tl_gitlab_pipeline'] = [
             'run'    => [
                 'label' => &$GLOBALS['TL_LANG']['tl_gitlab_pipeline']['run'],
                 'href'  => 'key=run',
-                'icon'  => 'bundles/richardhjcontaonewsletter2gosync/be-user-auth.png',
+                'icon'  => 'copy.gif',
             ],
         ],
     ],
 
     // Palettes
     'palettes' => [
-        'default' => '{title_legend},name,host,ref,token,variables',
+        'default' => '{title_legend},name,host,project,token,ref,variables',
     ],
 
     // Fields
@@ -88,12 +89,12 @@ $GLOBALS['TL_DCA']['tl_gitlab_pipeline'] = [
             ],
             'sql'       => "varchar(255) NOT NULL default ''",
         ],
-        'host'       => [
-            'label'     => &$GLOBALS['TL_LANG']['tl_gitlab_pipeline']['host'],
-            'exclude'   => true,
-            'filter'    => true,
-            'inputType' => 'text',
-            'eval'      => [
+        'host'      => [
+            'label'         => &$GLOBALS['TL_LANG']['tl_gitlab_pipeline']['host'],
+            'exclude'       => true,
+            'filter'        => true,
+            'inputType'     => 'text',
+            'eval'          => [
                 'mandatory' => true,
                 'maxlength' => 255,
                 'tl_class'  => 'w50',
@@ -101,9 +102,9 @@ $GLOBALS['TL_DCA']['tl_gitlab_pipeline'] = [
             'load_callback' => static function ($value) {
                 return empty($value) ? 'https://gitlab.com' : $value;
             },
-            'sql'       => "varchar(255) NOT NULL default ''",
+            'sql'           => "varchar(255) NOT NULL default ''",
         ],
-        'project'       => [
+        'project'   => [
             'label'     => &$GLOBALS['TL_LANG']['tl_gitlab_pipeline']['project'],
             'exclude'   => true,
             'inputType' => 'text',
@@ -133,22 +134,25 @@ $GLOBALS['TL_DCA']['tl_gitlab_pipeline'] = [
             'eval'          => [
                 'mandatory'    => true,
                 'maxlength'    => 255,
-                'hideInput'    => true,
                 'preserveTags' => true,
                 'tl_class'     => 'w50',
             ],
-            'load_callback' => static function ($value) {
-                return empty($value) ? '' : '*****';
-            },
-            'save_callback' => static function ($value, DataContainer $dc) {
-                if ('*****' === $value) {
-                    return $dc->activeRecord->token;
+            'load_callback' => [
+                static function ($value) {
+                    return empty($value) ? '' : '*****';
                 }
+            ],
+            'save_callback' => [
+                static function ($value, DataContainer $dc) {
+                    if ('*****' === $value) {
+                        return $dc->activeRecord->token;
+                    }
 
-                $secret = \Contao\System::getContainer()->getParameter('secret');
+                    $secret = \Contao\System::getContainer()->getParameter('secret');
 
-                return Crypto::encrypt($value, $secret);
-            },
+                    return Crypto::encryptWithPassword($value, $secret);
+                }
+            ],
             'sql'           => 'text NULL',
         ],
         'variables' => [

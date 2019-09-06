@@ -1,3 +1,7 @@
 services:
   ErdmannFreunde\ContaoGitlabTriggerBundle\EventListener\DataContainer\TriggerGitlabPipelineCommand:
     arguments: ['@router']
+    public: true
+
+  ErdmannFreunde\ContaoGitlabTriggerBundle\EventListener\DataContainer\PipelineLogLabelCallback:
+    public: true

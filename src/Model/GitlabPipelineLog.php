@@ -3,15 +3,17 @@
 
 namespace ErdmannFreunde\ContaoGitlabTriggerBundle\Model;
 
-
 use Contao\Model;
-use Contao\StringUtil;
-use Contao\System;
-use Defuse\Crypto\Crypto;
+
 
 class GitlabPipelineLog extends Model
 {
     protected static $strTable = 'tl_gitlab_pipeline_log';
+
+    public function setPid(int $pid): void
+    {
+        $this->arrData['pid'] = $pid;
+    }
 
     public function setResponse(string $data): void
     {
@@ -25,6 +27,11 @@ class GitlabPipelineLog extends Model
 
     public function setStatus(string $status): void
     {
-        $this->arrData['stattus'] = $status;
+        $this->arrData['status'] = $status;
+    }
+
+    public function setWebUrl(string $webUrl): void
+    {
+        $this->arrData['web_url'] = $webUrl;
     }
 }

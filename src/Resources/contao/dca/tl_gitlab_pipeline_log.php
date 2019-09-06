@@ -1,11 +1,17 @@
 <?php
 
 
-$GLOBALS['TL_DCA']['tl_gitlab_pipeline'] = [
+use ErdmannFreunde\ContaoGitlabTriggerBundle\EventListener\DataContainer\PipelineLogLabelCallback;
+
+$GLOBALS['TL_DCA']['tl_gitlab_pipeline_log'] = [
 
     // Config
     'config' => [
         'dataContainer' => 'Table',
+        'ptable'        => 'tl_gitlab_pipeline',
+        'closed'        => true,
+        'notEditable'   => true,
+        'notDeletable'  => true,
         'sql'           => [
             'keys' => [
                 'id' => 'primary',
@@ -18,15 +24,16 @@ $GLOBALS['TL_DCA']['tl_gitlab_pipeline'] = [
         'sorting'           => [
             'mode'        => 1,
             'fields'      => [
-                'name',
+                'created_at DESC',
             ],
             'flag'        => 1,
             'panelLayout' => 'filter,search;limit',
         ],
         'label'             => [
             'fields' => [
-                'name',
+                'pipeline_id',
             ],
+            'label_callback' => [PipelineLogLabelCallback::class, 'onLabelCallback'],
         ],
         'global_operations' => [
             'all' => [
@@ -71,28 +78,30 @@ $GLOBALS['TL_DCA']['tl_gitlab_pipeline'] = [
             'sql'   => "varchar(255) NOT NULL default ''",
         ],
         'created_at'  => [
-            'label' => &$GLOBALS['TL_LANG']['tl_gitlab_pipeline_log']['created_at'],
-            'sql'   => 'int(10) NULL',
+            'label'  => &$GLOBALS['TL_LANG']['tl_gitlab_pipeline_log']['created_at'],
+            'flag'   => 8,
+            'filter' => true,
+            'sql'    => 'int(10) NULL',
         ],
         'started_at'  => [
-            'label'  => &$GLOBALS['TL_LANG']['tl_gitlab_pipeline_log']['started_at'],
-            'filter' => true,
-            'sql'    => 'int(10) NULL',
+            'label' => &$GLOBALS['TL_LANG']['tl_gitlab_pipeline_log']['started_at'],
+            'flag'  => 8,
+            'sql'   => 'int(10) NULL',
         ],
         'updated_at'  => [
-            'label'  => &$GLOBALS['TL_LANG']['tl_gitlab_pipeline_log']['updated_at'],
-            'filter' => true,
-            'sql'    => 'int(10) NULL',
+            'label' => &$GLOBALS['TL_LANG']['tl_gitlab_pipeline_log']['updated_at'],
+            'flag'  => 8,
+            'sql'   => 'int(10) NULL',
         ],
-        'finished_at'  => [
+        'finished_at' => [
             'label'  => &$GLOBALS['TL_LANG']['tl_gitlab_pipeline_log']['finished_at'],
+            'flag'   => 8,
             'filter' => true,
             'sql'    => 'int(10) NULL',
         ],
         'response'    => [
-            'label'  => &$GLOBALS['TL_LANG']['tl_gitlab_pipeline_log']['response'],
-            'filter' => true,
-            'sql'    => 'text NULL',
+            'label' => &$GLOBALS['TL_LANG']['tl_gitlab_pipeline_log']['response'],
+            'sql'   => 'text NULL',
         ],
     ],
 ];
