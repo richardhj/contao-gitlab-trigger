@@ -1,0 +1,3 @@
+services:
+  ErdmannFreunde\ContaoGitlabTriggerBundle\EventListener\DataContainer\TriggerGitlabPipelineCommand:
+    arguments: ['@router']

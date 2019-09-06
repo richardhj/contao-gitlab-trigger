@@ -1,17 +1,17 @@
-# contao-backup-manager
+# contao-gitlab-trigger
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE)
 [![Dependency Status][ico-dependencies]][link-dependencies]
 
-This is a wrapper extension for <https://github.com/backup-manager/symfony>.
+Trigger Gitlab Pipelines within Contao.
 
 ## Install
 
 Via Composer
 
 ``` bash
-$ composer require richardhj/contao-backup-manager
+$ composer require erdmannfreunde/contao-gitlab-trigger
 ```
 
 ## Usage
@@ -20,9 +20,9 @@ Run `php vendor/bin/contao-console backup-manager:backup contao local -c gzip --
 
 The dumps will saved under `var/sql/`.
 
-[ico-version]: https://img.shields.io/packagist/v/richardhj/contao-backup-manager.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/erdmannfreunde/contao-gitlab-trigger.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-LGPL-brightgreen.svg?style=flat-square
 [ico-dependencies]: https://www.versioneye.com/php/richardhj:contao-backup-manager/badge.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/richardhj/contao-backup-manager
+[link-packagist]: https://packagist.org/packages/erdmannfreunde/contao-gitlab-trigger
 [link-dependencies]: https://www.versioneye.com/php/richardhj:contao-backup-manager

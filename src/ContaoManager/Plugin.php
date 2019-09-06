@@ -1,17 +1,17 @@
 <?php
 
 /**
- * This file is part of richardhj/contao-backup-manager.
+ * This file is part of erdmannfreunde/contao-gitlab-trigger.
  *
- * Copyright (c) 2018-2018 Richard Henkenjohann
+ * Copyright (c) 2019-2019 Erdmann & Freunde
  *
- * @package   richardhj/contao-backup-manager
+ * @package   erdmannfreunde/contao-gitlab-trigger
  * @author    Richard Henkenjohann <richardhenkenjohann@googlemail.com>
  * @copyright 2018-2018 Richard Henkenjohann
- * @license   https://github.com/richardhj/contao-backup-manager/blob/master/LICENSE LGPL-3.0
+ * @license   https://github.com/erdmannfreunde/contao-gitlab-trigger/blob/master/LICENSE LGPL-3.0
  */
 
-namespace Richardhj\ContaoBackupManager\ContaoManager;
+namespace ErdmannFreunde\ContaoGitlabTriggerBundle\ContaoManager;
 
 use BM\BackupManagerBundle\BMBackupManagerBundle;
 use Contao\CoreBundle\ContaoCoreBundle;
@@ -21,13 +21,14 @@ use Contao\ManagerPlugin\Bundle\Config\ConfigInterface;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
 use Contao\ManagerPlugin\Config\ConfigPluginInterface;
 use Contao\ManagerPlugin\Dependency\DependentPluginInterface;
-use Richardhj\ContaoBackupManager\RichardhjContaoBackupManagerBundle;
+use ErdmannFreunde\ContaoGitlabTriggerBundle\ErdmannFreundeContaoGitlabTriggerBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Zeichen32\GitLabApiBundle\Zeichen32GitLabApiBundle;
 
 /**
  * Contao Manager plugin.
  */
-class Plugin implements BundlePluginInterface, ConfigPluginInterface, DependentPluginInterface
+class Plugin implements BundlePluginInterface, DependentPluginInterface
 {
 
     /**
@@ -40,22 +41,17 @@ class Plugin implements BundlePluginInterface, ConfigPluginInterface, DependentP
     public function getBundles(ParserInterface $parser): array
     {
         return [
-            BundleConfig::create(BMBackupManagerBundle::class)
+            BundleConfig::create(Zeichen32GitLabApiBundle::class)
                 ->setLoadAfter([ContaoCoreBundle::class]),
-            BundleConfig::create(RichardhjContaoBackupManagerBundle::class)
-                ->setLoadAfter([BMBackupManagerBundle::class]),
+            BundleConfig::create(ErdmannFreundeContaoGitlabTriggerBundle::class)
+                ->setLoadAfter([Zeichen32GitLabApiBundle::class]),
         ];
-    }
-
-    public function registerContainerConfiguration(LoaderInterface $loader, array $managerConfig)
-    {
-        $loader->load(__DIR__ . '/../Resources/config/backup_manager.yml');
     }
 
     public function getPackageDependencies()
     {
         return [
-            'backup-manager/symfony',
+            'zeichen32/gitlabapibundle',
         ];
     }
 }
