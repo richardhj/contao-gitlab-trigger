@@ -59,7 +59,7 @@ $GLOBALS['TL_DCA']['tl_gitlab_pipeline'] = [
             'run'    => [
                 'label' => &$GLOBALS['TL_LANG']['tl_gitlab_pipeline']['run'],
                 'href'  => 'key=run',
-                'icon'  => 'copy.gif',
+                'icon'  => 'bundles/erdmannfreundecontaogitlabtrigger/img/trigger.svg',
             ],
         ],
     ],
