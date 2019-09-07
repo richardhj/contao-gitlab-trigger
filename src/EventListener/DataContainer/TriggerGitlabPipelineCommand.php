@@ -5,6 +5,7 @@ namespace ErdmannFreunde\ContaoGitlabTriggerBundle\EventListener\DataContainer;
 
 use Contao\CoreBundle\Exception\RedirectResponseException;
 use Contao\DataContainer;
+use ErdmannFreunde\ContaoGitlabTriggerBundle\EventListener\UpdatePipelineLogTrait;
 use ErdmannFreunde\ContaoGitlabTriggerBundle\Model\GitlabPipeline;
 use ErdmannFreunde\ContaoGitlabTriggerBundle\Model\GitlabPipelineLog;
 use GuzzleHttp\Client;
@@ -14,6 +15,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 class TriggerGitlabPipelineCommand
 {
+    use UpdatePipelineLogTrait;
+
     /**
      * @var RouterInterface
      */
@@ -54,20 +57,14 @@ class TriggerGitlabPipelineCommand
                 ]
             );
 
-            $json = json_decode($response->getBody(), true);
 
             $log = new GitlabPipelineLog();
             $log->setPid($pipelineConfig->id);
-            $log->setResponse($response->getBody());
-            $log->setPipelineId($json['id']);
-            $log->setStatus($json['status']);
-            $log->setWebUrl($json['web_url']);
-            foreach (['created_at', 'updated_at', 'started_at', 'finished_at'] as $k) {
-                $log->$k = strtotime($json[$k]) ?: null;
-            }
+            $log->setPipelineId($response['id']);
 
-            $log->save();
+            $json = json_decode($response->getBody(), true);
 
+            $this->updateLog($log, $json);
         } catch (GuzzleException $e) {
             // Ignored, response will be logged.
         }

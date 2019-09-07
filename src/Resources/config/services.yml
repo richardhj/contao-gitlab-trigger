@@ -5,3 +5,5 @@ services:
 
   ErdmannFreunde\ContaoGitlabTriggerBundle\EventListener\DataContainer\PipelineLogLabelCallback:
     public: true
+    arguments:
+      ['@gitlab_api']

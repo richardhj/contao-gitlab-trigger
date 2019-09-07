@@ -10,6 +10,17 @@ class GitlabPipelineLog extends Model
 {
     protected static $strTable = 'tl_gitlab_pipeline_log';
 
+    public function getPid(): int
+    {
+        return $this->arrData['pid'];
+    }
+
+    public function getPipelineId(): int
+    {
+        return $this->arrData['pipeline_id'];
+
+    }
+
     public function setPid(int $pid): void
     {
         $this->arrData['pid'] = $pid;

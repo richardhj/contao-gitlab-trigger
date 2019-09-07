@@ -1,5 +1,6 @@
 <?php
 
+use ErdmannFreunde\ContaoGitlabTriggerBundle\EventListener\DataContainer\PipelineLogLabelCallback;
 use ErdmannFreunde\ContaoGitlabTriggerBundle\EventListener\DataContainer\TriggerGitlabPipelineCommand;
 use ErdmannFreunde\ContaoGitlabTriggerBundle\Model\GitlabPipeline;
 use ErdmannFreunde\ContaoGitlabTriggerBundle\Model\GitlabPipelineLog;
@@ -17,3 +18,5 @@ $GLOBALS['TL_CSS'][] = 'bundles/erdmannfreundecontaogitlabtrigger/scss/ci.scss|s
 
 $GLOBALS['TL_MODELS']['tl_gitlab_pipeline']     = GitlabPipeline::class;
 $GLOBALS['TL_MODELS']['tl_gitlab_pipeline_log'] = GitlabPipelineLog::class;
+
+$GLOBALS['TL_HOOKS']['executePreActions'][] = [PipelineLogLabelCallback::class, 'onExecutePreActions'];
