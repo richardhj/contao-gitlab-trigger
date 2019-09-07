@@ -121,7 +121,7 @@ We create a new pipeline config in the Contao back end giving it the name "Overr
 
 [ico-version]: https://img.shields.io/packagist/v/erdmannfreunde/contao-gitlab-trigger.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-LGPL-brightgreen.svg?style=flat-square
-[ico-dependencies]: https://www.versioneye.com/php/richardhj:contao-backup-manager/badge.svg?style=flat-square
+[ico-dependencies]: https://www.versioneye.com/php/erdmannfreunde:contao-gitlab-trigger/badge.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/erdmannfreunde/contao-gitlab-trigger
-[link-dependencies]: https://www.versioneye.com/php/richardhj:contao-backup-manager
+[link-dependencies]: https://www.versioneye.com/php/erdmannfreunde:contao-gitlab-trigger

@@ -23,26 +23,26 @@ class GitlabPipelineLog extends Model
 
     public function setPid(int $pid): void
     {
-        $this->arrData['pid'] = $pid;
+        $this->pid = $pid;
     }
 
     public function setResponse(string $data): void
     {
-        $this->arrData['response'] = $data;
+        $this->response = $data;
     }
 
     public function setPipelineId(int $id): void
     {
-        $this->arrData['pipeline_id'] = $id;
+        $this->pipeline_id = $id;
     }
 
     public function setStatus(string $status): void
     {
-        $this->arrData['status'] = $status;
+        $this->status = $status;
     }
 
     public function setWebUrl(string $webUrl): void
     {
-        $this->arrData['web_url'] = $webUrl;
+        $this->web_url = $webUrl;
     }
 }

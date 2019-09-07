@@ -27,14 +27,15 @@ class PipelineLogLabelCallback
     public function onLabelCallback(array $row, string $label, $dc, array $args): array
     {
         $pipelineConfig = GitlabPipeline::findByPk($row['pid']);
-        $args[0]        = sprintf(
+
+        $args[0] = sprintf(
             '%s<span class="ci-id">#%s</span><span class="ci-title">%s</span>',
             $this->getBadge($row['status'], $row['web_url']),
             $row['pipeline_id'],
             $pipelineConfig->getName()
         );
 
-        $this->javascript();
+        $GLOBALS['TL_JAVASCRIPT']['ci-update'] = 'bundles/erdmannfreundecontaogitlabtrigger/js/ci-update.js';
 
         return $args;
     }
@@ -59,11 +60,6 @@ class PipelineLogLabelCallback
         $args = $this->onLabelCallback($log->row(), '', null, []);
 
         throw new ResponseException(new Response(reset($args)));
-    }
-
-    private function javascript()
-    {
-        $GLOBALS['TL_JAVASCRIPT']['ci-update'] = 'bundles/erdmannfreundecontaogitlabtrigger/js/ci-update.js';
     }
 
     private function getBadge(string $status, string $href): string

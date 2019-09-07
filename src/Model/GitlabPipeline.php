@@ -8,7 +8,6 @@ use Contao\Model;
 use Contao\StringUtil;
 use Contao\System;
 use Defuse\Crypto\Crypto;
-use Defuse\Crypto\Key;
 
 class GitlabPipeline extends Model
 {

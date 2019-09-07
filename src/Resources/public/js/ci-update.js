@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    let timerId = setInterval(() => checkRows(), 2000);
+    let timerId = setInterval(() => checkRows(), 2500);
 
     function checkRows() {
         let i, td;
