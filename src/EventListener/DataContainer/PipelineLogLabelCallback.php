@@ -6,6 +6,7 @@ namespace ErdmannFreunde\ContaoGitlabTriggerBundle\EventListener\DataContainer;
 
 use Contao\CoreBundle\Exception\NoContentResponseException;
 use Contao\CoreBundle\Exception\ResponseException;
+use Contao\Date;
 use Contao\Input;
 use ErdmannFreunde\ContaoGitlabTriggerBundle\EventListener\UpdatePipelineLogTrait;
 use ErdmannFreunde\ContaoGitlabTriggerBundle\Model\GitlabPipeline;
@@ -15,8 +16,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class PipelineLogLabelCallback
 {
-    use UpdatePipelineLogTrait;
-
     private $gitlabClient;
 
     public function __construct(Client $client)
@@ -29,10 +28,12 @@ class PipelineLogLabelCallback
         $pipelineConfig = GitlabPipeline::findByPk($row['pid']);
 
         $args[0] = sprintf(
-            '%s<span class="ci-id">#%s</span><span class="ci-title">%s</span>',
+            '%s<span class="ci-id">#%s</span><span class="ci-title">%s</span><p class="ci-duration"><img src="bundles/erdmannfreundecontaogitlabtrigger/img/duration.svg">%5$s</p><p class="ci-started"><img src="bundles/erdmannfreundecontaogitlabtrigger/img/calendar.svg">%4$s</p>',
             $this->getBadge($row['status'], $row['web_url']),
             $row['pipeline_id'],
-            $pipelineConfig->getName()
+            $pipelineConfig->getName(),
+            (new Date($row['created_at']))->date,
+            date('H:m:s',$row['finished_at'] - $row['started_at'])
         );
 
         $GLOBALS['TL_JAVASCRIPT']['ci-update'] = 'bundles/erdmannfreundecontaogitlabtrigger/js/ci-update.js';
@@ -55,7 +56,7 @@ class PipelineLogLabelCallback
 
         $updated = $this->gitlabClient->api('projects')->pipeline($pipelineConfig->getProject(), $log->getPipelineId());
 
-        $this->updateLog($log, $updated);
+        $log->updateLogByApiResponse($updated);
 
         $args = $this->onLabelCallback($log->row(), '', null, []);
 

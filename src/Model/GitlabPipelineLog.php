@@ -45,4 +45,17 @@ class GitlabPipelineLog extends Model
     {
         $this->web_url = $webUrl;
     }
+
+    public function updateLogByApiResponse(array $response): void
+    {
+        $this->setResponse(json_encode($response));
+        $this->setStatus($response['status']);
+        $this->setWebUrl($response['web_url']);
+
+        foreach (['created_at', 'updated_at', 'started_at', 'finished_at'] as $k) {
+            $this->$k = strtotime($response[$k]) ?: null;
+        }
+
+        $this->save();
+    }
 }
