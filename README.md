@@ -91,6 +91,20 @@ deploy_production:
 
 We switch to our GitLab repository and visit the "Pipeline triggers" section under > Settings > CI/CD. We create a new token for our purpose. Give it a recognizable name and save the token.
 
+In order to be able to show the current status of the pipeline being triggered, we need to utilize an API user.
+
+1. Create a new GitLab user that only has access to this particular repository.
+2. Switch to User > Settings > Access Tokens and create an access token with API scope. Use the api token within the next step:
+3. Add the following config to your `config.yml`:
+```yml 
+zeichen32_git_lab_api:
+  clients:
+    firstclient:
+      token: secret_token
+      url: https://gitlab.com/api/v4/
+      auth_method: url_token
+```
+
 ### Contao configuration
 
 We create a new pipeline config in the Contao back end giving it the name "Override Production".

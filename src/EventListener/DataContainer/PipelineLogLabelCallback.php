@@ -45,7 +45,7 @@ class PipelineLogLabelCallback
             return;
         }
 
-        $log = GitlabPipelineLog::findOneBy('pipeline_id', Input::post('pipeline'));
+        $log = GitlabPipelineLog::findOneBy('pipeline_id', ltrim(Input::postRaw('pipeline'), '#'));
         if (null === $log) {
             throw new NoContentResponseException();
         }
@@ -56,7 +56,9 @@ class PipelineLogLabelCallback
 
         $this->updateLog($log, $updated);
 
-        throw new ResponseException(new Response($this->onLabelCallback($log->row(), '', null, [])));
+        $args = $this->onLabelCallback($log->row(), '', null, []);
+
+        throw new ResponseException(new Response(reset($args)));
     }
 
     private function javascript()
