@@ -66,7 +66,7 @@ $GLOBALS['TL_DCA']['tl_gitlab_pipeline'] = [
 
     // Palettes
     'palettes' => [
-        'default' => '{title_legend},name,host,project,token,ref,variables',
+        'default' => '{title_legend},name,host,project,token,ref;{variables_legend:hide},variables',
     ],
 
     // Fields
@@ -85,7 +85,7 @@ $GLOBALS['TL_DCA']['tl_gitlab_pipeline'] = [
             'eval'      => [
                 'mandatory' => true,
                 'maxlength' => 255,
-                'tl_class'  => 'w50',
+                'tl_class'  => 'long',
             ],
             'sql'       => "varchar(255) NOT NULL default ''",
         ],
@@ -99,9 +99,11 @@ $GLOBALS['TL_DCA']['tl_gitlab_pipeline'] = [
                 'maxlength' => 255,
                 'tl_class'  => 'w50',
             ],
-            'load_callback' => static function ($value) {
-                return empty($value) ? 'https://gitlab.com' : $value;
-            },
+            'load_callback' => [
+                static function ($value) {
+                    return empty($value) ? 'https://gitlab.com' : $value;
+                }
+            ],
             'sql'           => "varchar(255) NOT NULL default ''",
         ],
         'project'   => [
@@ -124,6 +126,11 @@ $GLOBALS['TL_DCA']['tl_gitlab_pipeline'] = [
                 'mandatory' => true,
                 'maxlength' => 255,
                 'tl_class'  => 'w50',
+            ],
+            'load_callback' => [
+                static function ($value) {
+                    return empty($value) ? 'master' : $value;
+                }
             ],
             'sql'       => "varchar(255) NOT NULL default ''",
         ],
@@ -161,7 +168,7 @@ $GLOBALS['TL_DCA']['tl_gitlab_pipeline'] = [
             'inputType' => 'multiColumnWizard',
             'eval'      => [
                 'maxlength'    => 255,
-                'tl_class'     => 'w50',
+                'tl_class'     => 'clr',
                 'dragAndDrop'  => false,
                 'columnFields' => [
                     'variables_key'   => [
@@ -169,14 +176,14 @@ $GLOBALS['TL_DCA']['tl_gitlab_pipeline'] = [
                         'exclude'   => true,
                         'inputType' => 'text',
                         'eval'      => [
-                            'style' => 'width:150px',
+                            'style' => 'width:250px',
                         ],
                     ],
                     'variables_value' => [
                         'label'     => &$GLOBALS['TL_LANG']['tl_gitlab_pipeline']['variables_value'],
                         'exclude'   => true,
                         'inputType' => 'text',
-                        'eval'      => ['style' => 'width:250px'],
+                        'eval'      => ['style' => 'width:400px'],
                     ],
                 ],
             ],

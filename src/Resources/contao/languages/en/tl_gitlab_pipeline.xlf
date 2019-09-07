@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+<xliff version="1.1">
+    <file datatype="php" original="src/Resources/contao/languages/en/tl_gitlab_pipeline.php" source-language="en">
+        <body>
+            <trans-unit id="tl_gitlab_pipeline.run.0">
+                <source>Trigger pipeline</source>
+            </trans-unit>
+            <trans-unit id="tl_gitlab_pipeline.run.1">
+                <source>Trigger the pipeline ID %s</source>
+            </trans-unit>
+            <trans-unit id="tl_gitlab_pipeline.title_legend">
+                <source>Name and Settings</source>
+            </trans-unit>
+            <trans-unit id="tl_gitlab_pipeline.variables_legend">
+                <source>Variables</source>
+            </trans-unit>
+            <trans-unit id="tl_gitlab_pipeline.name.0">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="tl_gitlab_pipeline.name.1">
+                <source>Give this pipeline config a recognizable name.</source>
+            </trans-unit>
+            <trans-unit id="tl_gitlab_pipeline.host.0">
+                <source>Host</source>
+            </trans-unit>
+            <trans-unit id="tl_gitlab_pipeline.host.1">
+                <source>Enter the GitLab host. Defaults to https://gitlab.com.</source>
+            </trans-unit>
+            <trans-unit id="tl_gitlab_pipeline.project.0">
+                <source>Project</source>
+            </trans-unit>
+            <trans-unit id="tl_gitlab_pipeline.project.1">
+                <source>Enter the project ID. You can find this digit in the GitLab repository under > Settings >
+                    General.
+                </source>
+            </trans-unit>
+            <trans-unit id="tl_gitlab_pipeline.token.0">
+                <source>Token</source>
+            </trans-unit>
+            <trans-unit id="tl_gitlab_pipeline.token.1">
+                <source>Enter the pipeline trigger token. Create one in the GitLab repository under > Settings > CI/CD >
+                    "Pipeline triggers" section.
+                </source>
+            </trans-unit>
+            <trans-unit id="tl_gitlab_pipeline.ref.0">
+                <source>ref</source>
+            </trans-unit>
+            <trans-unit id="tl_gitlab_pipeline.ref.1">
+                <source>Enter the ref (branch or tag) upon which you want to trigger this pipeline.</source>
+            </trans-unit>
+            <trans-unit id="tl_gitlab_pipeline.variables.0">
+                <source>Variables</source>
+            </trans-unit>
+            <trans-unit id="tl_gitlab_pipeline.variables.1">
+                <source>Variables will be passed to the pipeline and used as environment variables. Variable values can
+                    be used to distinguish between triggered pipelines and normal pipelines.
+                </source>
+            </trans-unit>
+            <trans-unit id="tl_gitlab_pipeline.variables_key.0">
+                <source>Key</source>
+            </trans-unit>
+            <trans-unit id="tl_gitlab_pipeline.variables_value.0">
+                <source>Value</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
