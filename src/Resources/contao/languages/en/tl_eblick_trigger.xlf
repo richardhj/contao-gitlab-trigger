@@ -5,6 +5,12 @@
             <trans-unit id="tl_eblick_trigger.action.gitlab_pipeline">
                 <source>GitLab Pipeline</source>
             </trans-unit>
+            <trans-unit id="tl_eblick_trigger.action_gitlab_pipeline_id.0">
+                <source>GitLab Pipeline</source>
+            </trans-unit>
+            <trans-unit id="tl_eblick_trigger.action_gitlab_pipeline_id.1">
+                <source>Select the trigger configuration that will used to run the pipeline.</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

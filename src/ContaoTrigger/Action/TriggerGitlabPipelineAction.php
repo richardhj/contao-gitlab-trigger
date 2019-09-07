@@ -30,12 +30,18 @@ class TriggerGitlabPipelineAction implements ActionInterface, DataContainerCompo
 
     public function getDataContainerDefinition(): Definition
     {
-        $palette = 'act_gitlab_pipeline';
+        $palette = 'act_gitlab_pipeline_id';
 
         $fields = [
             'act_gitlab_pipeline_id' => [
+                'label'      => &$GLOBALS['TL_LANG']['tl_eblick_trigger']['action_gitlab_pipeline_id'],
                 'inputType'  => 'select',
+                'exclude'    => true,
                 'foreignKey' => 'tl_gitlab_pipeline.name',
+                'eval'       => [
+                    'includeBlankOption' => true,
+                    'mandatory'          => true,
+                ],
                 'sql'        => "int(10) unsigned NOT NULL default '0'"
             ]
         ];

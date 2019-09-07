@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         xhr.open('POST', window.location.href, true);
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         xhr.send(data);
     }
 
