@@ -4,6 +4,7 @@
 namespace ErdmannFreunde\ContaoGitlabTriggerBundle;
 
 
+use Contao\CoreBundle\Exception\InternalServerErrorException;
 use ErdmannFreunde\ContaoGitlabTriggerBundle\Model\GitlabPipeline;
 use ErdmannFreunde\ContaoGitlabTriggerBundle\Model\GitlabPipelineLog;
 use GuzzleHttp\Client;
@@ -36,16 +37,16 @@ class GitlabPipelineTrigger
                     ]
                 ]
             );
-        } catch (GuzzleException $e) {
-            // Ignored. Execution will be logged.
-        } finally {
-            $log = new GitlabPipelineLog();
-            $log->setPid($pipelineConfig->id);
-            $log->setPipelineId($response['id']);
 
             $json = json_decode($response->getBody(), true);
 
+            $log = new GitlabPipelineLog();
+            $log->setPid($pipelineConfig->id);
+            $log->setPipelineId($json['id']);
             $log->updateByApiResponse($json);
+
+        } catch (GuzzleException $e) {
+            throw new InternalServerErrorException($e->getMessage ());
         }
     }
 }
