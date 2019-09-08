@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<xliff version="1.1">
+    <file datatype="php" original="src/Resources/contao/languages/en/default.php" source-language="en">
+        <body>
+            <trans-unit id="MSC.gitlab_ci.status.success">
+                <source>finished</source>
+            </trans-unit>
+            <trans-unit id="MSC.gitlab_ci.status.pending">
+                <source>pending</source>
+            </trans-unit>
+            <trans-unit id="MSC.gitlab_ci.status.failed">
+                <source>failed</source>
+            </trans-unit>
+            <trans-unit id="MSC.gitlab_ci.status.running">
+                <source>running</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

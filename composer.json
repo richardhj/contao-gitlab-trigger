@@ -23,11 +23,14 @@
     "menatwork/contao-multicolumnwizard-bundle": "^3.4",
     "symfony/config": "^3.3 || ^4.0",
     "symfony/http-kernel": "^3.3 || ^4.0",
+    "symfony/routing": "^3.3 || ^4.0",
+    "symfony/http-foundation": "^3.3 || ^4.0",
     "zeichen32/gitlabapibundle": "^3.1"
   },
   "require-dev": {
     "contao/manager-plugin": "^2.7",
-    "eblick/contao-trigger": "^1.0.3"
+    "eblick/contao-trigger": "^1.0.3",
+    "m4tthumphrey/php-gitlab-api": "^9.13"
   },
   "autoload": {
     "psr-4": {

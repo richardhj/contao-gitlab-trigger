@@ -5,7 +5,6 @@ namespace ErdmannFreunde\ContaoGitlabTriggerBundle\EventListener\DataContainer;
 
 use Contao\CoreBundle\Exception\RedirectResponseException;
 use Contao\DataContainer;
-use ErdmannFreunde\ContaoGitlabTriggerBundle\EventListener\UpdatePipelineLogTrait;
 use ErdmannFreunde\ContaoGitlabTriggerBundle\GitlabPipelineTrigger;
 use Symfony\Component\Routing\RouterInterface;
 

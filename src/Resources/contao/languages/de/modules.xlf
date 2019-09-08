@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<xliff version="1.1">
+    <file datatype="php" original="src/Resources/contao/languages/en/modules.php" source-language="en">
+        <body>
+            <trans-unit id="MOD.gitlab_pipelines.0">
+                <source>Pipelines configuration</source>
+            </trans-unit>
+            <trans-unit id="MOD.gitlab_pipeline_log.0">
+                <source>Pipelines log</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

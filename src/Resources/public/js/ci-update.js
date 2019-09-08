@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    let timerId = setInterval(() => checkRows(), 2500);
-
+    // Check all pipelines being idle
     function checkRows() {
         let i, td;
         const b = document.querySelectorAll('.ci-status.ci-pending, .ci-status.ci-running');
@@ -18,12 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Refresh state of idle/running pipelines
     function updateRow(td) {
         const
             id = td.querySelector('.ci-id').innerText,
             rt = document.querySelector('input[name=REQUEST_TOKEN]').value,
             xhr = new XMLHttpRequest(),
             data = new FormData();
+        let t;
 
         if ('tl_file_list' !== td.className) return;
 
@@ -32,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         data.append('REQUEST_TOKEN', rt);
 
         xhr.onload = function () {
-            if (xhr.status === 200) {
+            if (200 === xhr.status) {
                 td.innerHTML = xhr.responseText;
             } else {
                 t = document.createElement('p');
@@ -46,5 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
         xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         xhr.send(data);
     }
+
+    // Interval for refresh: 2.5s
+    let timerId = setInterval(() => checkRows(), 2500);
 
 }, false);

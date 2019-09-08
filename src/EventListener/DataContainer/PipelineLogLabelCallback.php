@@ -8,7 +8,6 @@ use Contao\CoreBundle\Exception\NoContentResponseException;
 use Contao\CoreBundle\Exception\ResponseException;
 use Contao\Date;
 use Contao\Input;
-use ErdmannFreunde\ContaoGitlabTriggerBundle\EventListener\UpdatePipelineLogTrait;
 use ErdmannFreunde\ContaoGitlabTriggerBundle\Model\GitlabPipeline;
 use ErdmannFreunde\ContaoGitlabTriggerBundle\Model\GitlabPipelineLog;
 use Gitlab\Client;
@@ -56,7 +55,7 @@ class PipelineLogLabelCallback
 
         $updated = $this->gitlabClient->api('projects')->pipeline($pipelineConfig->getProject(), $log->getPipelineId());
 
-        $log->updateLogByApiResponse($updated);
+        $log->updateByApiResponse($updated);
 
         $args = $this->onLabelCallback($log->row(), '', null, []);
 
@@ -66,9 +65,10 @@ class PipelineLogLabelCallback
     private function getBadge(string $status, string $href): string
     {
         return sprintf(
-            '<a href="%2$s" class="ci-status ci-%1$s" target="_blank"><img src="bundles/erdmannfreundecontaogitlabtrigger/img/ci-%1$s.svg"> %1$s</a>',
+            '<a href="%2$s" class="ci-status ci-%1$s" target="_blank"><img src="bundles/erdmannfreundecontaogitlabtrigger/img/ci-%1$s.svg"> %3$s</a>',
             $status,
-            $href
+            $href,
+            $GLOBALS['TL_LANG']['MSC']['gitlab_ci']['status'][$status] ?? $status
         );
     }
 }

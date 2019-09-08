@@ -45,7 +45,7 @@ class GitlabPipelineTrigger
 
             $json = json_decode($response->getBody(), true);
 
-            $log->updateLogByApiResponse($json);
+            $log->updateByApiResponse($json);
         }
     }
 }

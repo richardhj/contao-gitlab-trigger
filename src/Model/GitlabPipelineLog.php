@@ -46,7 +46,7 @@ class GitlabPipelineLog extends Model
         $this->web_url = $webUrl;
     }
 
-    public function updateLogByApiResponse(array $response): void
+    public function updateByApiResponse(array $response): void
     {
         $this->setResponse(json_encode($response));
         $this->setStatus($response['status']);

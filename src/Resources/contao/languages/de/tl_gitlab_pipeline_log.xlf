@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<xliff version="1.1">
+    <file datatype="php" original="src/Resources/contao/languages/en/tl_gitlab_pipeline_log.php" source-language="en">
+        <body>
+            <trans-unit id="tl_gitlab_pipeline_log.pid.0">
+                <source>Pipeline config</source>
+            </trans-unit>
+            <trans-unit id="tl_gitlab_pipeline_log.pipeline_id.0">
+                <source>Pipeline ID</source>
+            </trans-unit>
+            <trans-unit id="tl_gitlab_pipeline_log.status.0">
+                <source>Status</source>
+            </trans-unit>
+            <trans-unit id="tl_gitlab_pipeline_log.web_url.0">
+                <source>Web URL</source>
+            </trans-unit>
+            <trans-unit id="tl_gitlab_pipeline_log.created_at.0">
+                <source>Created at</source>
+            </trans-unit>
+            <trans-unit id="tl_gitlab_pipeline_log.started_at.0">
+                <source>Started at</source>
+            </trans-unit>
+            <trans-unit id="tl_gitlab_pipeline_log.updated_at.0">
+                <source>Updated at</source>
+            </trans-unit>
+            <trans-unit id="tl_gitlab_pipeline_log.finished_at.0">
+                <source>Finished at</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
