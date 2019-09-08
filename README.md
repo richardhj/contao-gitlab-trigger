@@ -119,6 +119,70 @@ We create a new pipeline config in the Contao back end giving it the name "Overr
 
 **Variables:** These variables will be passed to the pipelines and will help to distinguish between triggered pipelines and normal pipelines. In our example it is important to add the variable `CTO_CMD` = `override_prod`.
 
+### Appendix: Environmental aware database parameters
+
+Sometimes, when overriding the database, some parameters break the website. For instance, when you have set the DNS of the page root to stage.example.com, the production site will become unreachable since the dns setting is wrong.
+
+To fix this, you can create an event listener that makes sure to update the dns accordingly.
+
+```php
+<?php
+
+
+namespace App\EventListener;
+
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DBALException;
+
+
+class OverrideHostSqlCommandListener
+{
+
+    private $connection;
+
+    public function __construct(Connection $connection)
+    {
+        $this->connection = $connection;
+    }
+
+    public function onSqlCompileCommands(array $sql): array
+    {
+        if ('usr_p512345_xxx' === $this->connection->getDatabase()) {
+            try {
+                $sql = $this->addQuery(12, 'www.example.org', $sql);
+                $sql = $this->addQuery(123, 'www.example.com', $sql);
+            } catch (DBALException $e) {
+                // Ignored.
+            }
+        }
+
+        return $sql;
+    }
+
+    /**
+     * @param int    $rootId
+     * @param string $dns
+     * @param array  $sql
+     *
+     * @return array
+     * @throws DBALException
+     */
+    private function addQuery(int $rootId, string $dns, array $sql): array
+    {
+        $actualDns = $this->connection->executeQuery('SELECT dns FROM tl_page WHERE id=' . $rootId)->fetchColumn();
+        if (false !== $dns && $dns !== $actualDns) {
+            $command = "UPDATE tl_page SET dns='$dns' WHERE id=$rootId";
+
+            $sql['ALTER_CHANGE'][md5($command)] = $command;
+        }
+
+        return $sql;
+    }
+}
+```
+
+Just register the event listener as sqlCompileCommands hook and run `contao:database:update` (utilizing fuzzyma's bundle) after database recovery. Same procedure applies, if you want to disable all users on the production system.
+
 [ico-version]: https://img.shields.io/packagist/v/erdmannfreunde/contao-gitlab-trigger.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-LGPL-brightgreen.svg?style=flat-square
 [ico-dependencies]: https://www.versioneye.com/php/erdmannfreunde:contao-gitlab-trigger/badge.svg?style=flat-square
