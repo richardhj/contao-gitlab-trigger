@@ -1,14 +1,14 @@
 <?php
 
-/**
- * This file is part of erdmannfreunde/contao-gitlab-trigger.
+declare(strict_types=1);
+
+/*
+ * Contao GitLab Trigger Bundle for Contao Open Source CMS.
  *
- * Copyright (c) 2019-2019 Erdmann & Freunde
- *
- * @package   erdmannfreunde/contao-gitlab-trigger
- * @author    Richard Henkenjohann <richardhenkenjohann@googlemail.com>
- * @copyright 2018-2018 Richard Henkenjohann
- * @license   https://github.com/erdmannfreunde/contao-gitlab-trigger/blob/master/LICENSE LGPL-3.0
+ * @copyright  Copyright (c) 2019, Erdmann & Freunde
+ * @author     Erdmann & Freunde <https://erdmann-freunde.de/>
+ * @license    LGPL-3.0-or-later
+ * @link       http://github.com/erdmannfreunde/contao-gitlab-trigger
  */
 
 namespace ErdmannFreunde\ContaoGitlabTriggerBundle;
@@ -17,5 +17,4 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class ErdmannFreundeContaoGitlabTriggerBundle extends Bundle
 {
-
 }

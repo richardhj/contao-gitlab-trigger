@@ -1,10 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * Contao GitLab Trigger Bundle for Contao Open Source CMS.
+ *
+ * @copyright  Copyright (c) 2019, Erdmann & Freunde
+ * @author     Erdmann & Freunde <https://erdmann-freunde.de/>
+ * @license    LGPL-3.0-or-later
+ * @link       http://github.com/erdmannfreunde/contao-gitlab-trigger
+ */
+
 use Defuse\Crypto\Crypto;
-use Defuse\Crypto\Key;
 
 $GLOBALS['TL_DCA']['tl_gitlab_pipeline'] = [
-
     // Config
     'config'   => [
         'dataContainer' => 'Table',
@@ -48,8 +57,8 @@ $GLOBALS['TL_DCA']['tl_gitlab_pipeline'] = [
                 'label'      => &$GLOBALS['TL_LANG']['tl_gitlab_pipeline']['delete'],
                 'href'       => 'act=delete',
                 'icon'       => 'delete.gif',
-                'attributes' => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm']
-                                . '\'))return false;Backend.getScrollOffset()"',
+                'attributes' => 'onclick="if(!confirm(\''.$GLOBALS['TL_LANG']['MSC']['deleteConfirm']
+                                .'\'))return false;Backend.getScrollOffset()"',
             ],
             'show'   => [
                 'label' => &$GLOBALS['TL_LANG']['tl_gitlab_pipeline']['show'],
@@ -102,7 +111,7 @@ $GLOBALS['TL_DCA']['tl_gitlab_pipeline'] = [
             'load_callback' => [
                 static function ($value) {
                     return empty($value) ? 'https://gitlab.com' : $value;
-                }
+                },
             ],
             'sql'           => "varchar(255) NOT NULL default ''",
         ],
@@ -130,7 +139,7 @@ $GLOBALS['TL_DCA']['tl_gitlab_pipeline'] = [
             'load_callback' => [
                 static function ($value) {
                     return empty($value) ? 'master' : $value;
-                }
+                },
             ],
             'sql'       => "varchar(255) NOT NULL default ''",
         ],
@@ -147,7 +156,7 @@ $GLOBALS['TL_DCA']['tl_gitlab_pipeline'] = [
             'load_callback' => [
                 static function ($value) {
                     return empty($value) ? '' : '*****';
-                }
+                },
             ],
             'save_callback' => [
                 static function ($value, DataContainer $dc) {
@@ -158,7 +167,7 @@ $GLOBALS['TL_DCA']['tl_gitlab_pipeline'] = [
                     $secret = \Contao\System::getContainer()->getParameter('secret');
 
                     return Crypto::encryptWithPassword($value, $secret);
-                }
+                },
             ],
             'sql'           => 'text NULL',
         ],

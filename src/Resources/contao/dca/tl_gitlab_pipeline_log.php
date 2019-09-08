@@ -1,10 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * Contao GitLab Trigger Bundle for Contao Open Source CMS.
+ *
+ * @copyright  Copyright (c) 2019, Erdmann & Freunde
+ * @author     Erdmann & Freunde <https://erdmann-freunde.de/>
+ * @license    LGPL-3.0-or-later
+ * @link       http://github.com/erdmannfreunde/contao-gitlab-trigger
+ */
 
 use ErdmannFreunde\ContaoGitlabTriggerBundle\EventListener\DataContainer\PipelineLogLabelCallback;
 
 $GLOBALS['TL_DCA']['tl_gitlab_pipeline_log'] = [
-
     // Config
     'config' => [
         'dataContainer' => 'Table',
@@ -47,8 +56,8 @@ $GLOBALS['TL_DCA']['tl_gitlab_pipeline_log'] = [
             'run' => [
                 'label'      => &$GLOBALS['TL_LANG']['tl_gitlab_pipeline']['run'],
                 'href'       => 'key=run',
-                'attributes' => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm']
-                                . '\'))return false;Backend.getScrollOffset()"',
+                'attributes' => 'onclick="if(!confirm(\''.$GLOBALS['TL_LANG']['MSC']['deleteConfirm']
+                                .'\'))return false;Backend.getScrollOffset()"',
                 'icon'       => 'bundles/richardhjcontaonewsletter2gosync/be-user-auth.png',
             ],
         ],

@@ -1,8 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * Contao GitLab Trigger Bundle for Contao Open Source CMS.
+ *
+ * @copyright  Copyright (c) 2019, Erdmann & Freunde
+ * @author     Erdmann & Freunde <https://erdmann-freunde.de/>
+ * @license    LGPL-3.0-or-later
+ * @link       http://github.com/erdmannfreunde/contao-gitlab-trigger
+ */
 
 namespace ErdmannFreunde\ContaoGitlabTriggerBundle;
-
 
 use Contao\CoreBundle\Exception\InternalServerErrorException;
 use ErdmannFreunde\ContaoGitlabTriggerBundle\Model\GitlabPipeline;
@@ -33,20 +42,19 @@ class GitlabPipelineTrigger
                     'form_params' => [
                         'ref'       => $pipelineConfig->getRef(),
                         'token'     => $pipelineConfig->getToken(),
-                        'variables' => $pipelineConfig->getVariables()
-                    ]
+                        'variables' => $pipelineConfig->getVariables(),
+                    ],
                 ]
             );
 
-            $json = json_decode($response->getBody(), true);
+            $json = json_decode((string)$response->getBody(), true);
 
             $log = new GitlabPipelineLog();
-            $log->setPid($pipelineConfig->id);
-            $log->setPipelineId($json['id']);
+            $log->setPid((int)$pipelineConfig->id);
+            $log->setPipelineId((int)$json['id']);
             $log->updateByApiResponse($json);
-
         } catch (GuzzleException $e) {
-            throw new InternalServerErrorException($e->getMessage ());
+            throw new InternalServerErrorException($e->getMessage());
         }
     }
 }

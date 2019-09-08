@@ -1,10 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * Contao GitLab Trigger Bundle for Contao Open Source CMS.
+ *
+ * @copyright  Copyright (c) 2019, Erdmann & Freunde
+ * @author     Erdmann & Freunde <https://erdmann-freunde.de/>
+ * @license    LGPL-3.0-or-later
+ * @link       http://github.com/erdmannfreunde/contao-gitlab-trigger
+ */
 
 namespace ErdmannFreunde\ContaoGitlabTriggerBundle\Model;
 
 use Contao\Model;
-
 
 class GitlabPipelineLog extends Model
 {
@@ -12,13 +21,12 @@ class GitlabPipelineLog extends Model
 
     public function getPid(): int
     {
-        return $this->arrData['pid'];
+        return (int) $this->arrData['pid'];
     }
 
     public function getPipelineId(): int
     {
-        return $this->arrData['pipeline_id'];
-
+        return (int) $this->arrData['pipeline_id'];
     }
 
     public function setPid(int $pid): void
@@ -53,7 +61,7 @@ class GitlabPipelineLog extends Model
         $this->setWebUrl($response['web_url']);
 
         foreach (['created_at', 'updated_at', 'started_at', 'finished_at'] as $k) {
-            $this->$k = strtotime($response[$k]) ?: null;
+            $this->$k = $response[$k] ? strtotime($response[$k]) : null;
         }
 
         $this->save();

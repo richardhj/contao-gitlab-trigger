@@ -1,28 +1,25 @@
 <?php
 
-/**
- * This file is part of erdmannfreunde/contao-gitlab-trigger.
+declare(strict_types=1);
+
+/*
+ * Contao GitLab Trigger Bundle for Contao Open Source CMS.
  *
- * Copyright (c) 2019-2019 Erdmann & Freunde
- *
- * @package   erdmannfreunde/contao-gitlab-trigger
- * @author    Richard Henkenjohann <richardhenkenjohann@googlemail.com>
- * @copyright 2018-2018 Richard Henkenjohann
- * @license   https://github.com/erdmannfreunde/contao-gitlab-trigger/blob/master/LICENSE LGPL-3.0
+ * @copyright  Copyright (c) 2019, Erdmann & Freunde
+ * @author     Erdmann & Freunde <https://erdmann-freunde.de/>
+ * @license    LGPL-3.0-or-later
+ * @link       http://github.com/erdmannfreunde/contao-gitlab-trigger
  */
 
 namespace ErdmannFreunde\ContaoGitlabTriggerBundle\ContaoManager;
 
-use BM\BackupManagerBundle\BMBackupManagerBundle;
 use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Config\ConfigInterface;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
-use Contao\ManagerPlugin\Config\ConfigPluginInterface;
 use Contao\ManagerPlugin\Dependency\DependentPluginInterface;
 use ErdmannFreunde\ContaoGitlabTriggerBundle\ErdmannFreundeContaoGitlabTriggerBundle;
-use Symfony\Component\Config\Loader\LoaderInterface;
 use Zeichen32\GitLabApiBundle\Zeichen32GitLabApiBundle;
 
 /**
@@ -30,7 +27,6 @@ use Zeichen32\GitLabApiBundle\Zeichen32GitLabApiBundle;
  */
 class Plugin implements BundlePluginInterface, DependentPluginInterface
 {
-
     /**
      * Gets a list of autoload configurations for this bundle.
      *

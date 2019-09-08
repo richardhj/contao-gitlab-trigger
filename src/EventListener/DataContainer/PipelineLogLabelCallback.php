@@ -1,8 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * Contao GitLab Trigger Bundle for Contao Open Source CMS.
+ *
+ * @copyright  Copyright (c) 2019, Erdmann & Freunde
+ * @author     Erdmann & Freunde <https://erdmann-freunde.de/>
+ * @license    LGPL-3.0-or-later
+ * @link       http://github.com/erdmannfreunde/contao-gitlab-trigger
+ */
 
 namespace ErdmannFreunde\ContaoGitlabTriggerBundle\EventListener\DataContainer;
-
 
 use Contao\CoreBundle\Exception\NoContentResponseException;
 use Contao\CoreBundle\Exception\ResponseException;
@@ -32,7 +41,7 @@ class PipelineLogLabelCallback
             $row['pipeline_id'],
             $pipelineConfig->getName(),
             (new Date($row['created_at']))->date,
-            date('H:m:s',$row['finished_at'] - $row['started_at'])
+            date('H:m:s', $row['finished_at'] - $row['started_at'])
         );
 
         $GLOBALS['TL_JAVASCRIPT']['ci-refresh'] = 'bundles/erdmannfreundecontaogitlabtrigger/js/ci-refresh.js';

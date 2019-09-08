@@ -1,8 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * Contao GitLab Trigger Bundle for Contao Open Source CMS.
+ *
+ * @copyright  Copyright (c) 2019, Erdmann & Freunde
+ * @author     Erdmann & Freunde <https://erdmann-freunde.de/>
+ * @license    LGPL-3.0-or-later
+ * @link       http://github.com/erdmannfreunde/contao-gitlab-trigger
+ */
 
 namespace ErdmannFreunde\ContaoGitlabTriggerBundle\Model;
-
 
 use Contao\Model;
 use Contao\StringUtil;
@@ -34,11 +43,11 @@ class GitlabPipeline extends Model
     }
 
     /**
-     * @return string|null
-     *
      * @throws \Defuse\Crypto\Exception\EnvironmentIsBrokenException
      * @throws \Defuse\Crypto\Exception\WrongKeyOrModifiedCiphertextException
      * @throws \Defuse\Crypto\Exception\BadFormatException
+     *
+     * @return string|null
      */
     public function getToken(): ?string
     {
