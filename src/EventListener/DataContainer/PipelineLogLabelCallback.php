@@ -35,7 +35,7 @@ class PipelineLogLabelCallback
             date('H:m:s',$row['finished_at'] - $row['started_at'])
         );
 
-        $GLOBALS['TL_JAVASCRIPT']['ci-update'] = 'bundles/erdmannfreundecontaogitlabtrigger/js/ci-update.js';
+        $GLOBALS['TL_JAVASCRIPT']['ci-refresh'] = 'bundles/erdmannfreundecontaogitlabtrigger/js/ci-refresh.js';
 
         return $args;
     }
