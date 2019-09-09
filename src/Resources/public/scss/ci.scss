@@ -10,37 +10,46 @@
   &.ci-success {
     color: #1aaa55;
     border-color: #1aaa55;
+
+    &:not(span):hover {
+      background-color: #dcf5e7;
+    }
   }
 
   &.ci-pending {
     color: #fc9403;
     border-color: #fc9403;
+
+    &:not(span):hover {
+      background-color: #fff1de;
+    }
   }
 
   &.ci-failed {
     color: #db3b21;
     border-color: #db3b21;
+
+    &:not(span):hover {
+      background-color: #fbe5e1;
+    }
   }
 
   &.ci-running {
     color: #1f78d1;
     border-color: #1f78d1;
+
+    &:not(span):hover {
+      background-color: #e4f0fb;
+    }
   }
 
-  &.ci-success:not(span):hover {
-    background-color: #dcf5e7;
-  }
+  &.ci-skipped {
+    color: #707070;
+    border-color: #707070;
 
-  &.ci-pending:not(span):hover {
-    background-color: #fff1de;
-  }
-
-  &.ci-failed:not(span):hover {
-    background-color: #fbe5e1;
-  }
-
-  &.ci-running:not(span):hover {
-    background-color: #e4f0fb;
+    &:not(span):hover {
+      background-color: rgba(112, 112, 112, 0.07);
+    }
   }
 
   img {
