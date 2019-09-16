@@ -24,14 +24,18 @@
     "symfony/config": "^3.3 || ^4.0",
     "symfony/http-kernel": "^3.3 || ^4.0",
     "symfony/routing": "^3.3 || ^4.0",
-    "symfony/http-foundation": "^3.3 || ^4.0",
-    "zeichen32/gitlabapibundle": "^3.1"
+    "symfony/http-foundation": "^3.3 || ^4.0"
   },
   "require-dev": {
     "contao/manager-plugin": "^2.7",
     "eblick/contao-trigger": "^1.0.3",
     "friendsofphp/php-cs-fixer": "^2.12",
-    "m4tthumphrey/php-gitlab-api": "^9.13"
+    "m4tthumphrey/php-gitlab-api": "^9.13",
+    "zeichen32/gitlabapibundle": "^3.1"
+  },
+  "suggest": {
+    "eblick/contao-trigger": "Run GitLab pipelines on certain conditions by using the Contao trigger framework",
+    "zeichen32/gitlabapibundle": "To be able to fetch the current status of the pipeline (recommended)"
   },
   "autoload": {
     "psr-4": {
