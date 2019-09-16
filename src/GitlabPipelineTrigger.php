@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace ErdmannFreunde\ContaoGitlabTriggerBundle;
 
 use Contao\CoreBundle\Exception\InternalServerErrorException;
+use Defuse\Crypto\Exception\CryptoException;
 use ErdmannFreunde\ContaoGitlabTriggerBundle\Model\GitlabPipeline;
 use ErdmannFreunde\ContaoGitlabTriggerBundle\Model\GitlabPipelineLog;
 use Gitlab\Client as GitlabClient;
@@ -68,7 +69,7 @@ class GitlabPipelineTrigger
                 $log->save();
             }
 
-        } catch (GuzzleException $e) {
+        } catch (GuzzleException | CryptoException $e) {
             throw new InternalServerErrorException($e->getMessage());
         }
     }
