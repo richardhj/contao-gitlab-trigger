@@ -16,11 +16,19 @@ namespace ErdmannFreunde\ContaoGitlabTriggerBundle;
 use Contao\CoreBundle\Exception\InternalServerErrorException;
 use ErdmannFreunde\ContaoGitlabTriggerBundle\Model\GitlabPipeline;
 use ErdmannFreunde\ContaoGitlabTriggerBundle\Model\GitlabPipelineLog;
-use GuzzleHttp\Client;
+use Gitlab\Client as GitlabClient;
+use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\GuzzleException;
 
 class GitlabPipelineTrigger
 {
+    private $gitlabClient;
+
+    public function __construct(?GitlabClient $client)
+    {
+        $this->gitlabClient = $client;
+    }
+
     public function trigger(int $pipelineId): void
     {
         $pipelineConfig = GitlabPipeline::findByPk($pipelineId);
@@ -28,7 +36,7 @@ class GitlabPipelineTrigger
             throw new \LogicException("Pipeline config with ID $pipelineId not found!");
         }
 
-        $client = new Client(
+        $client = new GuzzleClient(
             [
                 'base_uri' => $pipelineConfig->getHost() ?: 'https://gitlab.com',
             ]
@@ -47,12 +55,19 @@ class GitlabPipelineTrigger
                 ]
             );
 
-            $json = json_decode((string)$response->getBody(), true);
+            $json = json_decode((string) $response->getBody(), true);
 
             $log = new GitlabPipelineLog();
-            $log->setPid((int)$pipelineConfig->id);
-            $log->setPipelineId((int)$json['id']);
+            $log->setPid((int) $pipelineConfig->id);
+            $log->setPipelineId((int) $json['id']);
             $log->updateByApiResponse($json);
+
+            // If we do not have a GitLab client, we cannot update the pipeline status. As a result, we use an alternative status here
+            if (null === $this->gitlabClient) {
+                $log->setStatus('triggered');
+                $log->save();
+            }
+
         } catch (GuzzleException $e) {
             throw new InternalServerErrorException($e->getMessage());
         }

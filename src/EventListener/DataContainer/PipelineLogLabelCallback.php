@@ -26,7 +26,7 @@ class PipelineLogLabelCallback
 {
     private $gitlabClient;
 
-    public function __construct(Client $client)
+    public function __construct(?Client $client)
     {
         $this->gitlabClient = $client;
     }
@@ -41,17 +41,19 @@ class PipelineLogLabelCallback
             $row['pipeline_id'],
             $pipelineConfig->getName(),
             (new Date($row['created_at']))->date,
-            date('H:m:s', $row['finished_at'] - $row['started_at'])
+            $row['finished_at'] ? date('H:m:s', $row['finished_at'] - $row['started_at']) : '-'
         );
 
-        $GLOBALS['TL_JAVASCRIPT']['ci-refresh'] = 'bundles/erdmannfreundecontaogitlabtrigger/js/ci-refresh.js';
+        if (null !== $this->gitlabClient) {
+            $GLOBALS['TL_JAVASCRIPT']['ci-refresh'] = 'bundles/erdmannfreundecontaogitlabtrigger/js/ci-refresh.js';
+        }
 
         return $args;
     }
 
     public function onExecutePreActions(string $action): void
     {
-        if ('update-ci-label' !== $action) {
+        if (null === $this->gitlabClient || 'update-ci-label' !== $action) {
             return;
         }
 

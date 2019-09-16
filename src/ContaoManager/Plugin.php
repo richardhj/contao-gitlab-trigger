@@ -36,11 +36,18 @@ class Plugin implements BundlePluginInterface, DependentPluginInterface
      */
     public function getBundles(ParserInterface $parser): array
     {
+        if (class_exists(Zeichen32GitLabApiBundle::class)) {
+            return [
+                BundleConfig::create(Zeichen32GitLabApiBundle::class)
+                    ->setLoadAfter([ContaoCoreBundle::class]),
+                BundleConfig::create(ErdmannFreundeContaoGitlabTriggerBundle::class)
+                    ->setLoadAfter([Zeichen32GitLabApiBundle::class]),
+            ];
+        }
+
         return [
-            BundleConfig::create(Zeichen32GitLabApiBundle::class)
-                ->setLoadAfter([ContaoCoreBundle::class]),
             BundleConfig::create(ErdmannFreundeContaoGitlabTriggerBundle::class)
-                ->setLoadAfter([Zeichen32GitLabApiBundle::class]),
+                ->setLoadAfter([ContaoCoreBundle::class]),
         ];
     }
 

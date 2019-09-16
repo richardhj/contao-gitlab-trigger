@@ -52,6 +52,15 @@
     }
   }
 
+  &.ci-triggered {
+    color: #707070;
+    border-color: #707070;
+
+    &:not(span):hover {
+      background-color: rgba(112, 112, 112, 0.07);
+    }
+  }
+
   img {
     height: 16px;
     width: 16px;

@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <xliff version="1.1">
-    <file datatype="php" original="src/Resources/contao/languages/en/default.php" source-language="en" target-language="de">
+    <file datatype="php" original="src/Resources/contao/languages/en/default.php" source-language="en"
+          target-language="de">
         <body>
             <trans-unit id="MSC.gitlab_ci.status.success">
                 <source>finished</source>
@@ -17,6 +18,10 @@
             <trans-unit id="MSC.gitlab_ci.status.running">
                 <source>running</source>
                 <target>läuft</target>
+            </trans-unit>
+            <trans-unit id="MSC.gitlab_ci.status.triggered">
+                <source>triggered</source>
+                <target>ausgelöst</target>
             </trans-unit>
         </body>
     </file>

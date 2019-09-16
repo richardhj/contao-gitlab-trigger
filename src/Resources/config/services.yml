@@ -1,5 +1,7 @@
 services:
-  ErdmannFreunde\ContaoGitlabTriggerBundle\GitlabPipelineTrigger: ~
+  ErdmannFreunde\ContaoGitlabTriggerBundle\GitlabPipelineTrigger: 
+    arguments:
+      ['@?gitlab_api']
 
   ErdmannFreunde\ContaoGitlabTriggerBundle\EventListener\DataContainer\TriggerGitlabPipelineCommand:
     arguments: ['@ErdmannFreunde\ContaoGitlabTriggerBundle\GitlabPipelineTrigger','@router']
@@ -8,7 +10,7 @@ services:
   ErdmannFreunde\ContaoGitlabTriggerBundle\EventListener\DataContainer\PipelineLogLabelCallback:
     public: true
     arguments:
-      ['@gitlab_api']
+      ['@?gitlab_api']
 
   ErdmannFreunde\ContaoGitlabTriggerBundle\ContaoTrigger\Action\TriggerGitlabPipelineAction:
     arguments: ['@ErdmannFreunde\ContaoGitlabTriggerBundle\GitlabPipelineTrigger']

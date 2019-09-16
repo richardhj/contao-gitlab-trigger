@@ -89,9 +89,11 @@ deploy_production:
 
 ### GitLab configuration
 
-We switch to our GitLab repository and visit the "Pipeline triggers" section under > Settings > CI/CD. We create a new token for our purpose. Give it a recognizable name and save the token.
+We switch to our GitLab repository and visit the "Pipeline triggers" section under > Settings > CI/CD. We create a new token for our purpose. Give it a recognizable name and remember the token for the upcoming step.
 
 In order to be able to show the current status of the pipeline being triggered, we need to utilize an API user.
+
+This step is optional and you need to install `zeichen32/gitlabapibundle` to be able to use this feature.
 
 1. Create a new GitLab user that only has access to this particular repository.
 2. Switch to User > Settings > Access Tokens and create an access token with API scope. Use the api token within the next step:
@@ -118,6 +120,11 @@ We create a new pipeline config in the Contao back end giving it the name "Overr
 **ref:** The ref can be either branch or tag. The GitLab runner will check out this reference to build the application. As we use `GIT_STRATEGY: none` in all jobs of our example config, the GitLab runner will not check out the repository, making this parameter obsolete. Though this parameter is mandatory, this option defaults to the `master` branch.
 
 **Variables:** These variables will be passed to the pipelines and will help to distinguish between triggered pipelines and normal pipelines. In our example it is important to add the variable `CTO_CMD` = `override_prod`.
+
+### Contao-Trigger implementation
+
+This bundle has a implementation to [eBlick/contao-trigger](https://github.com/eBlick/contao-trigger). This implementation
+ allows you to trigger a GitLab pipeline when certain conditions are met.
 
 ### Appendix: Environmental aware database parameters
 
