@@ -14,6 +14,10 @@ Via Composer
 $ composer require erdmannfreunde/contao-gitlab-trigger
 ```
 
+## Demonstration
+
+![](docs/overview-backend.png)
+
 ## Usage
 
 We will describe the functionality by example.
