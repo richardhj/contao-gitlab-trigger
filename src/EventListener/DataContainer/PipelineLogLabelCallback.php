@@ -36,7 +36,7 @@ class PipelineLogLabelCallback
         $pipelineConfig = GitlabPipeline::findByPk($row['pid']);
 
         $args[0] = sprintf(
-            '%s<span class="ci-id">#%s</span><span class="ci-title">%s</span><p class="ci-duration"><img src="bundles/erdmannfreundecontaogitlabtrigger/img/duration.svg">%5$s</p><p class="ci-started"><img src="bundles/erdmannfreundecontaogitlabtrigger/img/calendar.svg">%4$s</p>',
+            '%s<span class="ci-id">#%s</span><span class="ci-title">%s</span><p class="ci-started"><img src="bundles/erdmannfreundecontaogitlabtrigger/img/calendar.svg">%4$s</p><p class="ci-duration"><img src="bundles/erdmannfreundecontaogitlabtrigger/img/duration.svg">%5$s</p>',
             $this->getBadge($row['status'], $row['web_url']),
             $row['pipeline_id'],
             $pipelineConfig->getName(),
