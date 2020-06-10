@@ -1,5 +1,5 @@
 {
-  "name": "erdmannfreunde/contao-gitlab-trigger",
+  "name": "richardhj/contao-gitlab-trigger",
   "description": "Trigger GitLab pipelines within Contao.",
   "type": "contao-bundle",
   "license": "LGPL-3.0-or-later",
@@ -11,8 +11,8 @@
     }
   ],
   "support": {
-    "issues": "https://github.com/erdmannfreunde/contao-gitlab-trigger/issues",
-    "source": "https://github.com/erdmannfreunde/contao-gitlab-trigger"
+    "issues": "https://github.com/richardhj/contao-gitlab-trigger/issues",
+    "source": "https://github.com/richardhj/contao-gitlab-trigger"
   },
   "require": {
     "php": "^7.1",
@@ -39,10 +39,10 @@
   },
   "autoload": {
     "psr-4": {
-      "ErdmannFreunde\\ContaoGitlabTriggerBundle\\": "src/"
+      "Richardhj\\ContaoGitlabTriggerBundle\\": "src/"
     }
   },
   "extra": {
-    "contao-manager-plugin": "ErdmannFreunde\\ContaoGitlabTriggerBundle\\ContaoManager\\Plugin"
+    "contao-manager-plugin": "Richardhj\\ContaoGitlabTriggerBundle\\ContaoManager\\Plugin"
   }
 }

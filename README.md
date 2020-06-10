@@ -11,7 +11,7 @@ Trigger Gitlab Pipelines within Contao.
 Via Composer
 
 ``` bash
-$ composer require erdmannfreunde/contao-gitlab-trigger
+$ composer require richardhj/contao-gitlab-trigger
 ```
 
 ## Demonstration
@@ -192,11 +192,11 @@ class OverrideHostSqlCommandListener
 }
 ```
 
-Just register the event listener as sqlCompileCommands hook and run `contao:database:update` (utilizing fuzzyma's bundle) after database recovery. Same procedure applies, if you want to disable all users on the production system.
+Just register the event listener as sqlCompileCommands hook and run `contao:migrate` after database recovery. Same procedure applies, if you want to disable all users on the production system.
 
-[ico-version]: https://img.shields.io/packagist/v/erdmannfreunde/contao-gitlab-trigger.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/richardhj/contao-gitlab-trigger.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-LGPL-brightgreen.svg?style=flat-square
-[ico-dependencies]: https://www.versioneye.com/php/erdmannfreunde:contao-gitlab-trigger/badge.svg?style=flat-square
+[ico-dependencies]: https://www.versioneye.com/php/richardhj:contao-gitlab-trigger/badge.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/erdmannfreunde/contao-gitlab-trigger
-[link-dependencies]: https://www.versioneye.com/php/erdmannfreunde:contao-gitlab-trigger
+[link-packagist]: https://packagist.org/packages/richardhj/contao-gitlab-trigger
+[link-dependencies]: https://www.versioneye.com/php/richardhj:contao-gitlab-trigger
